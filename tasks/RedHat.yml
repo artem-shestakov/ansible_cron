@@ -1,0 +1,10 @@
+---
+- name: Install packages | Install Cron
+  ansible.builtin.yum:
+    name: crontabs
+    state: present
+
+- name: Install packages | Make sure a service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: crond

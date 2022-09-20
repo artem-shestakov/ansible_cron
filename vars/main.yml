@@ -1,0 +1,8 @@
+# ---
+# cron_jobs:
+#   - name: backup_pgsql
+#     user: postgres
+#     weekday: 1
+#     file:
+#       name: pgsql.sh
+#       dest: "/home/postgres"

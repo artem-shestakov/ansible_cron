@@ -1,0 +1,15 @@
+plugins:
+  - ["@semantic-release/commit-analyzer", {
+      "preset": "angular",
+      "releaseRules": [
+        {"type": "fix", "release": "patch"},
+        {"type": "feat", "release": "minor"},
+        {"scope": "README", "release": false},
+      ]
+    }]
+  - "@semantic-release/release-notes-generator"
+  - "@semantic-release/github"
+branches:
+  - "master"
+  - name: "develop"
+    prerelease: true

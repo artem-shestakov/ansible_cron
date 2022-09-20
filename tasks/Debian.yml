@@ -1,0 +1,11 @@
+---
+- name: Install packages | Install Cron
+  ansible.builtin.apt:
+    name: cron
+    state: present
+    update_cache: true
+
+- name: Install packages | Make sure a service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: cron

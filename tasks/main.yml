@@ -1,0 +1,26 @@
+---
+- name: Cron | Install packages
+  include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Cron | Create cron job
+  ansible.builtin.cron:
+    name: "{{ item.name | default(omit) }}"
+    job: "{{ item.job }}"
+    minute: "{{ item.minute | default(omit) }}"
+    hour: "{{ item.hour | default(omit) }}"
+    day: "{{ item.day | default(omit) }}"
+    month: "{{ item.month | default(omit) }}"
+    weekday: "{{ item.weekday | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    user: "{{ item.user | default(omit) }}"
+  with_items: "{{ cron_jobs }}"
+  when: cron_jobs is defined
+
+- name: Cron | Copy file for job
+  ansible.builtin.copy:
+    src: "{{ item.file.name}}"
+    dest: "{{ item.file.dest}}"
+    owner: "{{ item.user | default(ansible_user_id) }}"
+    mode: '0700'
+  with_items: "{{ cron_jobs }}"
+  when: cron_jobs is defined and item.file is defined

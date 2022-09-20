@@ -1,0 +1,10 @@
+---
+cron_jobs:
+  - name: Job_1
+    minute: "*/2"
+    job: echo "Job_1"
+  - name: Job_2
+    job: "~/test.sh"
+    file:
+      name: test.sh
+      dest: "$HOME/test.sh"
